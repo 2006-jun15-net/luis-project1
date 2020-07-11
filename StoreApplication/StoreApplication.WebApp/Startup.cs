@@ -9,7 +9,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using StoreApplication.Domain.Interfaces;
-using StoreApplication.Domain.Repositories;
+using StoreApplication.DatabaseAccess.Repositories;
+using StoreApplication.DatabaseAccess.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace StoreApplication.WebApp
 {
@@ -25,6 +27,9 @@ namespace StoreApplication.WebApp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<StoreApplicationDBContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("SqlServer")));
+
             services.AddControllersWithViews();
             services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddScoped<IProductRepository, ProductRepository>();

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using StoreApplication.Domain.Interfaces;
+using StoreApplication.WebApp.ViewModels;
 
 namespace StoreApplication.WebApp.Controllers
 {
@@ -18,9 +19,16 @@ namespace StoreApplication.WebApp.Controllers
             _categoryRepository = categoryRepository;
         }
         
-        public ViewResult List()
+        public IActionResult List()
         {
-            return View(_productRepository.GetAllProducts);
+            //ViewBag.CurrentCategory = "BestSellers";
+
+            //return View(_productRepository.GetAllProducts);
+
+            var productListViewModel = new ProductListViewModel();
+            productListViewModel.Products = _productRepository.GetAllProducts;
+            productListViewModel.CurrentCategory = "Best Sellers";
+            return View(productListViewModel);
         }
 
         public IActionResult Index()
