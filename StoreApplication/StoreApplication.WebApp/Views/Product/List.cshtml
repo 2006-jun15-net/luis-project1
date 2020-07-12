@@ -4,17 +4,6 @@
     <h1>@Model.CurrentCategory.</h1>
     @foreach (var product in Model.Products)
     {
-        <div class="col-sm-4 col-lg-4 col-md-4">
-            <div class="thumbnail">
-                <img src="@product.ImageThumbnailUrl" alt="image for product" />
-                <div class="caption">
-                    <h3 class="float-right">@product.Price.ToString("c")</h3>
-                    <h3>@product.Name</h3>
-                    <p>@product.Description</p>
-                </div>
-            </div>
-           
-          
-        </div>
+        <partial name="_productCard" model="product" />
     }
     

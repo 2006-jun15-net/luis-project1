@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using StoreApplication.DatabaseAccess.Models;
 
 namespace StoreApplication.DatabaseAccess.Migrations
 {
     [DbContext(typeof(StoreApplicationDBContext))]
-    partial class StoreApplicationDBContextModelSnapshot : ModelSnapshot
+    [Migration("20200712050846_AddingShoppingCartItem")]
+    partial class AddingShoppingCartItem
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

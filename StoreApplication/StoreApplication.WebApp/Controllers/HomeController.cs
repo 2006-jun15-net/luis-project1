@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using StoreApplication.Domain.Interfaces;
 using StoreApplication.WebApp.ViewModels;
 
 namespace StoreApplication.WebApp.Controllers
@@ -12,15 +13,24 @@ namespace StoreApplication.WebApp.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly IProductRepository _productRepository;
+        //public HomeController(ILogger<HomeController> logger)
+        //{
+        //    _logger = logger;
+        //}
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(IProductRepository productRepository)
         {
-            _logger = logger;
+            _productRepository = productRepository;
         }
 
         public IActionResult Index()
         {
-            return View();
+            var homeViewModel = new HomeViewModel
+            {
+                ProductsOnSale = _productRepository.GetProductsOnSale
+            };
+            return View(homeViewModel);
         }
 
         public IActionResult Privacy()

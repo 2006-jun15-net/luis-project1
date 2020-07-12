@@ -21,9 +21,6 @@ namespace StoreApplication.WebApp.Controllers
         
         public IActionResult List()
         {
-            //ViewBag.CurrentCategory = "BestSellers";
-
-            //return View(_productRepository.GetAllProducts);
 
             var productListViewModel = new ProductListViewModel();
             productListViewModel.Products = _productRepository.GetAllProducts;
@@ -34,6 +31,15 @@ namespace StoreApplication.WebApp.Controllers
         public IActionResult Index()
         {
             return View();
+        }
+
+        public IActionResult Details(int id)
+        {
+            var product = _productRepository.GetProductById(id);
+            if (product == null)
+                return NotFound();
+
+            return View(product);
         }
     }
 }
