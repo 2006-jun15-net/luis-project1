@@ -1,44 +1,12 @@
 ﻿
 body {
-    padding-top: 70px; 
     background-image: url('/images/StoreApplicationBackground.jpg');
+    background-size: cover;
     background-repeat: no-repeat;
     font-family: 'Source Sans Pro', sans-serif;
+    padding-bottom: 25px;
 }
 
-
-.caption {
-    height: 130px;
-    overflow: hidden;
-    background-color: white;
-}
-
-.caption h3 {
-    white-space: nowrap;
-}
-
-.thumbnail img {
-    width: 100%;
-}
-
-
-
-.thumbnail {
-    padding: 0;
-}
-
-.thumbnail .caption-full {
-    padding: 9px;
-    color: #333;
-}
-
-
-.navbar-nav > .nav-item > a {
-    font-size: 1.2em;
-    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
-    color: white;
-    text-decoration: none;
-}
 
 .slide-image {
     width: 100%;
@@ -48,9 +16,63 @@ body {
     margin-bottom: 30px;
 }
 
-.carousel-control,
-.item {
-    border-radius: 4px;
+
+
+.carousel-item > img {
+    width: 1280px;
+    height: 200px;
+}
+
+.product-list-item {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    
+}
+
+
+
+.caption {
+    height: 130px;
+    overflow: hidden;
+}
+
+    .caption h4 {
+        white-space: nowrap;
+    }
+
+.thumbnail img {
+    width: 100%;
+}
+
+.addToCart {
+   
+}
+
+.thumbnail {
+    padding: 0;
+}
+
+    .thumbnail .caption-full {
+        padding: 9px;
+        color: #333;
+    }
+
+
+.nav.navbar-nav.navbar-right li a {
+    color: white;
+    font-size: 1.2em;
+}
+
+.navbar-nav > .nav-item > a {
+    font-size: 1.2em;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+    color: white;
+    align-self: center;
+}
+
+.navbar-nav > .nav-item > a :hover {
+    cursor: pointer;
 }
 
 .carousel .item {
@@ -72,4 +94,25 @@ body {
 .btn {
     background-color: #fcaeae !important;
     border-color: #fba1a1 !important;
+}
+
+.dropdown {
+    align-self: center !important;
+}
+
+#category-menu :hover {
+    cursor: pointer;
+}
+
+.dropdown-menu > .dopdown-link > a
+{
+    color: black;
+}
+
+.dropdown-link a :hover{
+    cursor: pointer;
+}
+
+.dropdown-toggle:hover{
+    cursor: pointer;
 }

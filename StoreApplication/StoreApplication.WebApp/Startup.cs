@@ -12,6 +12,7 @@ using StoreApplication.Domain.Interfaces;
 using StoreApplication.DatabaseAccess.Repositories;
 using StoreApplication.DatabaseAccess.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 
 namespace StoreApplication.WebApp
 {
@@ -30,13 +31,18 @@ namespace StoreApplication.WebApp
             services.AddDbContext<StoreApplicationDBContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("SqlServer")));
 
+            services.AddDefaultIdentity<IdentityUser>().AddEntityFrameworkStores<StoreApplicationDBContext>();
+
+
             services.AddControllersWithViews();
             services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddScoped<IProductRepository, ProductRepository>();
             services.AddScoped<ShoppingCart>(sc => ShoppingCart.GetCart(sc));
+            services.AddScoped<IOrderRepository, OrderRepository>();
 
             services.AddHttpContextAccessor();
             services.AddSession();
+            services.AddRazorPages();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -55,8 +61,9 @@ namespace StoreApplication.WebApp
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseSession();
-            app.UseRouting();
 
+            app.UseRouting();
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
@@ -64,6 +71,9 @@ namespace StoreApplication.WebApp
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+                endpoints.MapRazorPages();
+
             });
         }
     }

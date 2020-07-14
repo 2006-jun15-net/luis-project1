@@ -1,0 +1,60 @@
+﻿@model IEnumerable<StoreApplication.WebApp.ViewModels.OrderViewModel>
+
+@{
+    ViewData["Title"] = "OrderHistory";
+}
+
+<h1>Order History</h1>
+<p id="ErrorMsg">@ViewData["ErrorMsg"]</p>
+@{
+    @if (ViewData["ErrorMsg"] == null)
+    {
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.OrderId)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.firstName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.lastName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.OrderPlaced)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.OrderTotal)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.OrderId)
+                    </td>
+                    <th>
+                        @Html.DisplayFor(modelItem => item.firstName)
+                    </th>
+                    <th>
+                        @Html.DisplayFor(modelItem => item.lastName)
+                    </th>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.OrderPlaced)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.OrderTotal)
+                    </td>
+                    <td>
+                        <a class="text-light" asp-controller="Order" asp-action="Details" asp-route-OrderId="@item.OrderId">Details</a>
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    }
+}

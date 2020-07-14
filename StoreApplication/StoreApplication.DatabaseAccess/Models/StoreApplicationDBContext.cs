@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using StoreApplication.Domain.Models;
 using System;
 using System.Collections.Generic;
@@ -7,7 +9,7 @@ using System.Text;
 
 namespace StoreApplication.DatabaseAccess.Models
 {
-    public class StoreApplicationDBContext : DbContext
+    public class StoreApplicationDBContext : IdentityDbContext<IdentityUser>
     {
         public StoreApplicationDBContext(DbContextOptions<StoreApplicationDBContext> options) :
             base(options)
@@ -18,6 +20,14 @@ namespace StoreApplication.DatabaseAccess.Models
         public DbSet<Product> Products { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<ShoppingCartItem> ShoppingCartItems { get; set; }
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<OrderDetail> OrderDetails { get; set; }
+
+
+
+        
+
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -36,8 +46,8 @@ namespace StoreApplication.DatabaseAccess.Models
                 Price = 1.99M,
                 Description = "Head of cabbage",
                 CategoryId = 1,
-                ImageUrl = "~\\Images\\Cabbage.jpg",
-                ImageThumbnailUrl = "~\\Images\\Cabbage.jpg",
+                ImageUrl = "\\Images\\Cabbage.jpg",
+                ImageThumbnailUrl = "\\Images\\Cabbage.jpg",
                 IsInStock=true,
                 IsOnSale=true
             });
@@ -49,8 +59,8 @@ namespace StoreApplication.DatabaseAccess.Models
                 Price = 36.99M,
                 Description = "High-Quality aluminum baseball bat",
                 CategoryId = 2,
-                ImageUrl = "~\\Images\\BaseballBat.jpg",
-                ImageThumbnailUrl = "~\\Images\\BaseballBat.jpg",
+                ImageUrl = "\\Images\\BaseballBat.jpg",
+                ImageThumbnailUrl = "\\Images\\BaseballBat.jpg",
                 IsInStock = true,
                 IsOnSale = false
             });
@@ -62,8 +72,8 @@ namespace StoreApplication.DatabaseAccess.Models
                 Price = 2.99M,
                 Description = "Multi-purpose college ruled notebook",
                 CategoryId = 3,
-                ImageUrl = "~\\Images\\Notebook.jpg",
-                ImageThumbnailUrl = "~\\Images\\Notebook.jpg",
+                ImageUrl = "\\Images\\Notebook.jpg",
+                ImageThumbnailUrl = "\\Images\\Notebook.jpg",
                 IsInStock = true,
                 IsOnSale = true
             });
@@ -74,9 +84,9 @@ namespace StoreApplication.DatabaseAccess.Models
                 Name = "IPhone",
                 Price = 399.99M,
                 Description = "Apple IPhone SE",
-                CategoryId = 1,
-                ImageUrl = "~\\Images\\IponeSE.png",
-                ImageThumbnailUrl = "~\\Images\\IphoneSE.png",
+                CategoryId = 4,
+                ImageUrl = "\\Images\\IponeSE.png",
+                ImageThumbnailUrl = "\\Images\\IphoneSE.png",
                 IsInStock = true,
                 IsOnSale = false
             });
@@ -88,8 +98,8 @@ namespace StoreApplication.DatabaseAccess.Models
                 Price = 129.95M,
                 Description = "Lego Star Wars Kylo Ren's Shuttle",
                 CategoryId = 5,
-                ImageUrl = "~\\Images\\LegoKyloRen.jpg",
-                ImageThumbnailUrl = "~\\Images\\LegoKyloRen.jpg",
+                ImageUrl = "\\Images\\LegoKyloRen.jpg",
+                ImageThumbnailUrl = "\\Images\\LegoKyloRen.jpg",
                 IsInStock = true,
                 IsOnSale = false
             });
