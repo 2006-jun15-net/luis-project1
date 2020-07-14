@@ -1,0 +1,60 @@
+
+
+trigger:
+- master
+
+pr:
+- master
+
+variables:
+  solutionPath: StoreApp
+
+jobs:
+- job: build_linux
+  pool:
+    vmImage: 'ubuntu-latest'
+
+  steps:
+  - task: SonarCloudPrepare@1
+    inputs:
+      SonarCloud: 'SonarCloud'
+      organization: '2006-jun15-net'
+      scannerMode: 'MSBuild'
+      projectKey: '2006-jun15-net_luis-project1'
+      projectName: 'luis-project1'
+      extraProperties: |
+        sonar.exclusions=**/lib/**
+        sonar.cs.vstest.reportsPaths=$(Agent.TempDirectory)/*.trx
+        sonar.cs.opencover.reportsPaths=$(Agent.TempDirectory)/*/coverage.opencover.xml
+    
+  - script: dotnet build -c Release
+    displayName: dotnet build
+    workingDirectory: $(solutionPath)
+
+  - task: DotNetCoreCLI@2
+    displayName: dotnet test
+    inputs:
+      command: 'test'
+      projects: '$(solutionPath)'
+      arguments: '-c Release --collect:"XPlat Code Coverage" -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=cobertura,opencover'
+      testRunTitle: 'ubuntu'  
+
+
+  - task: PublishCodeCoverageResults@1
+    displayName: 'publish code coverage'
+    inputs:
+      codeCoverageTool: 'Cobertura'
+      summaryFileLocation: '$(Agent.TempDirectory)/*/coverage.cobertura.xml'
+      failIfCoverageEmpty: true
+
+  - task: SonarCloudAnalyze@1
+    displayName: sonarcloud run analysis
+
+  - task: SonarCloudPublish@1
+    displayName: sonarcloud publish
+    inputs:
+      pollingTimeoutSec: '300'
+
+  - script: dotnet publish -c Release -o ../publish
+    displayName: dotnet publish
+    workingDirectory: $(solutionPath)
