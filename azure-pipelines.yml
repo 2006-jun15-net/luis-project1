@@ -7,7 +7,7 @@ pr:
 - master
 
 variables:
-  solutionPath: StoreApp
+  solutionPath: StoreApplication
 
 jobs:
 - job: build_linux
