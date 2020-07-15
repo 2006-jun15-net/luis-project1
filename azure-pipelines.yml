@@ -40,12 +40,12 @@ jobs:
       testRunTitle: 'ubuntu'  
 
 
-  - task: PublishCodeCoverageResults@1
-    displayName: 'publish code coverage'
-    inputs:
-      codeCoverageTool: 'Cobertura'
-      summaryFileLocation: '$(Agent.TempDirectory)/*/coverage.cobertura.xml'
-      failIfCoverageEmpty: true
+  # - task: PublishCodeCoverageResults@1
+  #   displayName: 'publish code coverage'
+  #   inputs:
+  #     codeCoverageTool: 'Cobertura'
+  #     summaryFileLocation: '$(Agent.TempDirectory)/*/coverage.cobertura.xml'
+  #     failIfCoverageEmpty: true
 
   - task: SonarCloudAnalyze@1
     displayName: sonarcloud run analysis
